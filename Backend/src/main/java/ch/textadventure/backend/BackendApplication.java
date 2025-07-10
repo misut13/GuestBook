@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Hauptklasse für das Spring Boot Backend der Gästebuch-Applikation.
- * <p>
+ *
  * Diese Klasse startet die gesamte Anwendung und initialisiert
  * den eingebetteten Webserver sowie die Konfigurationen.
  */
