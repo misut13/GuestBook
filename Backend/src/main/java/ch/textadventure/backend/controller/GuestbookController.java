@@ -2,6 +2,7 @@ package ch.textadventure.backend.controller;
 
 import ch.textadventure.backend.model.GuestbookEntry;
 import ch.textadventure.backend.repository.GuestbookRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,5 +31,17 @@ public class GuestbookController {
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GuestbookEntry> updateEntry(@PathVariable Long id, @RequestBody GuestbookEntry updatedEntry) {
+        return repository.findById(id)
+                .map(entry -> {
+                    entry.setName(updatedEntry.getName());
+                    entry.setMessage(updatedEntry.getMessage());
+                    repository.save(entry);
+                    return ResponseEntity.ok(entry);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
