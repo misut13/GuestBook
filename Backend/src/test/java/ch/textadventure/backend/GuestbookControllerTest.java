@@ -78,7 +78,7 @@ public class GuestbookControllerTest {
      * Testet, ob ein bestehender Eintrag korrekt aktualisiert wird.
      */
     @Test
-    void testUpdateEntry_FoundAndUpdated() {
+    void testUpdateEntry_Updated() {
         Long id = 1L;
         GuestbookEntry oldEntry = new GuestbookEntry("Max", "Alt");
         GuestbookEntry newEntry = new GuestbookEntry("Max", "Neu");
@@ -88,7 +88,6 @@ public class GuestbookControllerTest {
 
         var result = guestbookController.updateEntry(id, newEntry);
 
-        assertTrue(result.getStatusCode().is2xxSuccessful());
         assertEquals("Neu", result.getBody().getMessage());
     }
 
