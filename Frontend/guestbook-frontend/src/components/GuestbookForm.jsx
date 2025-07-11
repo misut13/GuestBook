@@ -1,5 +1,4 @@
-import React from 'react'; // ✅ nötig für Babel / Jest / JSX
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function GuestbookForm() {
   const [name, setName] = useState('');
@@ -7,43 +6,58 @@ function GuestbookForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const valid = await fetch('http://localhost:8080/api/users/verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password })
-    })
-      .then(res => res.json())
-      .catch(() => false);
-
-    if (!valid) {
-      alert('Login-Daten falsch!');
-      return;
-    }
-
-    fetch('http://localhost:8080/api/guestbook', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, message })
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Fehler beim Speichern");
-        return res.json();
-      })
-      .then(() => {
-        setSuccess(true);
-        setName('');
-        setMessage('');
-        setEmail('');
-        setPassword('');
-        setTimeout(() => setSuccess(false), 3000);
-      })
-      .catch(() => {
-        alert("Eintrag konnte nicht gespeichert werden.");
+    try {
+      // 1. Login-Verifizierung
+      const verifyRes = await fetch('http://localhost:8080/api/users/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
       });
+
+      if (!verifyRes.ok) {
+        alert('Login-Daten falsch!');
+        setLoading(false);
+        return;
+      }
+
+      const isValid = await verifyRes.json();
+      if (!isValid) {
+        alert('Verifizierung fehlgeschlagen!');
+        setLoading(false);
+        return;
+      }
+
+      // 2. Gästebucheintrag absenden
+      const entryRes = await fetch('http://localhost:8080/api/guestbook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message })
+      });
+
+      if (!entryRes.ok) {
+        const errorText = await entryRes.text();
+        throw new Error(`Fehler beim Speichern:\n${errorText}`);
+      }
+
+      // Erfolgreich gespeichert
+      setSuccess(true);
+      setName('');
+      setMessage('');
+      setEmail('');
+      setPassword('');
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      console.error(err);
+      alert(err.message || 'Eintrag konnte nicht gespeichert werden.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,7 +91,9 @@ function GuestbookForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Absenden</button>
+      <button type="submit" disabled={loading}>
+        {loading ? 'Bitte warten...' : 'Absenden'}
+      </button>
       {success && <p style={{ marginTop: '1rem', color: '#6c63ff' }}>✅ Eintrag gespeichert!</p>}
     </form>
   );

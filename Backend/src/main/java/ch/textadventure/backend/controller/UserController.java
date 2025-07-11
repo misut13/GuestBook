@@ -2,6 +2,8 @@ package ch.textadventure.backend.controller;
 
 import ch.textadventure.backend.model.User;
 import ch.textadventure.backend.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -51,14 +53,20 @@ public class UserController {
      * Verifiziert einen Benutzer anhand von Name, E-Mail und Passwort.
      *
      * @param input Eingabedaten des Benutzers (validiert)
-     * @return true, wenn Benutzer existiert und übereinstimmt; sonst false
+     * @return ResponseEntity mit true bei Erfolg, 401 bei Fehler
      */
     @PostMapping("/verify")
-    public boolean verifyUser(@Valid @RequestBody User input) {
-        return repository.findAll().stream()
-                .anyMatch(user ->
-                        user.getName().equals(input.getName()) &&
-                        user.getEmail().equals(input.getEmail()) &&
-                        user.getPassword().equals(input.getPassword()));
+    public ResponseEntity<Boolean> verifyUser(@Valid @RequestBody User input) {
+        boolean isValid = repository.findAll().stream().anyMatch(user ->
+            user.getName().equals(input.getName()) &&
+            user.getEmail().equals(input.getEmail()) &&
+            user.getPassword().equals(input.getPassword())
+        );
+
+        if (isValid) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
     }
 }
