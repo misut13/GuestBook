@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import UserList from '../components/UserList';
 
+/**
+ * Seite zur Anzeige aller Benutzer.
+ */
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,20 +24,13 @@ function Users() {
   return (
     <div className="container">
       <h1>Alle Benutzer</h1>
-
       <div className="card">
         {loading ? (
           <p>Lade Benutzer...</p>
         ) : users.length === 0 ? (
           <p>Keine Benutzer gefunden.</p>
         ) : (
-          <ul className="user-list">
-            {users.map((user) => (
-              <li key={user.id}>
-                <strong>{user.name}</strong>
-              </li>
-            ))}
-          </ul>
+          <UserList users={users} />
         )}
       </div>
     </div>

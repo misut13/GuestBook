@@ -1,5 +1,21 @@
 import { Link } from 'react-router-dom';
 
+/**
+ * Die Startseite des Gästebuch-Projekts.
+ *
+ * Diese Komponente zeigt drei Navigationslinks:
+ * - zum Gästebuch
+ * - zur Eintragsseite
+ * - zur Registrierung
+ *
+ * Sie wird als Landing-Page verwendet.
+ *
+ * @component
+ * @returns {JSX.Element} Die gerenderte Startseite
+ *
+ * @example
+ * return <Home />
+ */
 function Home() {
   return (
     <>
