@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"ch.textadventure.backend"},{"l":"ch.textadventure.backend.controller"},{"l":"ch.textadventure.backend.exception"},{"l":"ch.textadventure.backend.model"},{"l":"ch.textadventure.backend.repository"}];updateSearchResults();
