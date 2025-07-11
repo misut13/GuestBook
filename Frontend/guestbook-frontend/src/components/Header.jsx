@@ -1,5 +1,18 @@
 import { Link } from 'react-router-dom';
 
+/**
+ * Navigationsleiste für die Anwendung.
+ *
+ * Zeigt Links zu den Hauptseiten:
+ * - Start
+ * - Gästebuch
+ * - Neuer Eintrag
+ * - Registrierung
+ * - Benutzerliste
+ *
+ * @component
+ * @returns {JSX.Element} Die Navigationsleiste
+ */
 function Header() {
   return (
     <nav>
