@@ -5,6 +5,7 @@ import ch.textadventure.backend.model.User;
 import ch.textadventure.backend.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -70,7 +71,8 @@ public class UserControllerTest {
         when(userRepository.findAll()).thenReturn(List.of(existing));
 
         User input = new User("Nina", "nina@mail.com", "secure");
-        boolean result = userController.verifyUser(input);
+        ResponseEntity<Boolean> response = userController.verifyUser(input);
+        boolean result = Boolean.TRUE.equals(response.getBody());
 
         assertTrue(result);
     }
@@ -84,7 +86,8 @@ public class UserControllerTest {
         when(userRepository.findAll()).thenReturn(List.of(existing));
 
         User input = new User("Nina", "nina@mail.com", "wrongpass");
-        boolean result = userController.verifyUser(input);
+        ResponseEntity<Boolean> response = userController.verifyUser(input);
+        boolean result = Boolean.TRUE.equals(response.getBody());
 
         assertFalse(result);
     }
