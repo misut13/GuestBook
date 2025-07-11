@@ -92,28 +92,28 @@ function GuestbookForm() {
         placeholder="Dein Benutzername"
         aria-label="Name"
         value={name}
-        onChange={(e) => setName(e.target.value)} // Eingabe speichern
+        onChange={(e) => setName(e.target.value)} // Eingabe zwischenspeichern
         required
       />
       <textarea
         placeholder="Deine Nachricht"
         aria-label="Message"
         value={message}
-        onChange={(e) => setMessage(e.target.value)} // Nachricht speichern
+        onChange={(e) => setMessage(e.target.value)} // Nachricht zwischenspeichern
         required
       />
       <input
         type="email"
         placeholder="Deine E-Mail"
         value={email}
-        onChange={(e) => setEmail(e.target.value)} // E-Mail speichern
+        onChange={(e) => setEmail(e.target.value)} // E-Mail zwischenspeichern
         required
       />
       <input
         type="password"
         placeholder="Dein Passwort"
         value={password}
-        onChange={(e) => setPassword(e.target.value)} // Passwort speichern
+        onChange={(e) => setPassword(e.target.value)} // Passwort zwischenspeichern
         required
       />
       <button type="submit" disabled={loading}>
