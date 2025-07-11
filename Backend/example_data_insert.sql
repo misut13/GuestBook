@@ -1,3 +1,4 @@
+use guestbook;
 -- === Weitere User-Daten ===
 INSERT INTO user (name, email, password) VALUES
   ('Kevin', 'kevin@example.com', 'kevin321'),
