@@ -94,7 +94,7 @@ function GuestbookForm() {
       <button type="submit" disabled={loading}>
         {loading ? 'Bitte warten...' : 'Absenden'}
       </button>
-      {success && <p style={{ marginTop: '1rem', color: '#6c63ff' }}>✅ Eintrag gespeichert!</p>}
+      {success && <p style={{ marginTop: '1rem', color: '#6c63ff' }}>Eintrag gespeichert!</p>}
     </form>
   );
 }
