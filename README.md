@@ -1,2 +1,3 @@
 # GuestBook
-Simple Guestbook with vite, react and spring
+Einfaches Gästebuch mit vite, react und spring.
+Weitere Infos sind in der Dokumentation zu finden.
