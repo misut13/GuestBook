@@ -1,5 +1,7 @@
+-- Datenbank auswählen
 use guestbook;
--- === Weitere User-Daten ===
+
+-- Weitere User-Daten
 INSERT INTO user (name, email, password) VALUES
   ('Kevin', 'kevin@example.com', 'kevin321'),
   ('Laura', 'laura@example.com', 'lauPass!'),
@@ -12,7 +14,7 @@ INSERT INTO user (name, email, password) VALUES
   ('Samuel', 'samuel@example.com', 's@m321'),
   ('Tina', 'tina@example.com', 't1naRulez');
 
--- === Weitere Gästebucheinträge ===
+-- Weitere Gästebucheinträge
 INSERT INTO guestbook_entry (name, message) VALUES
   ('Kevin', 'Ich finde die Ladezeiten super!'),
   ('Laura', 'Kann man auch Bilder einfügen?'),
