@@ -9,4 +9,3 @@ CREATE USER 'GuestbookUser'@'localhost' IDENTIFIED BY 'Test.123';
 
 -- Rechte auf die guestbook-Datenbank geben
 GRANT ALL PRIVILEGES ON guestbook.* TO 'GuestbookUser'@'localhost';
-FLUSH PRIVILEGES;
