@@ -1,0 +1,5 @@
+ch.textadventure.backend
+ch.textadventure.backend.controller
+ch.textadventure.backend.exception
+ch.textadventure.backend.model
+ch.textadventure.backend.repository
